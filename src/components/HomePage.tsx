@@ -1,4 +1,4 @@
-
+import React, { useState } from 'react'; // <-- Added useState import
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -9,8 +9,10 @@ import {
   DollarSign,
   TrendingUp,
   Star,
-  Zap
+  Zap,
+  Info // <-- Added Info icon for Saiba Mais button (optional)
 } from 'lucide-react';
+import { ApresentacaoViewer } from './ApresentacaoViewer'; // <-- Added import for the viewer
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -23,6 +25,8 @@ interface HomePageProps {
 }
 
 export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
+  const [mostrarApresentacao, setMostrarApresentacao] = useState(false); // <-- Added state for viewer visibility
+
   const currentSeason = {
     name: "Guerreiros Místicos",
     theme: "Fantasia Medieval",
@@ -45,6 +49,18 @@ export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
           <p className="text-xl text-purple-100 mb-6">
             Colecione, Compete e Ganhe Prêmios Reais!
           </p>
+          
+          {/* --- Botão Saiba Mais Adicionado (Estilo Corrigido) --- */}
+          <Button 
+            onClick={() => setMostrarApresentacao(true)}
+            variant="outline"
+            className="mb-4 mr-2 border-purple-400 text-purple-200 hover:bg-purple-700 hover:text-white hover:border-purple-700" // Adjusted style for visibility
+          >
+            <Info className="w-4 h-4 mr-2" /> {/* Optional icon */}
+            Saiba Mais sobre o Projeto
+          </Button>
+          {/* --- Fim do Botão Saiba Mais --- */}
+
           <Button 
             onClick={() => onNavigate('store')}
             className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-purple-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
@@ -179,6 +195,17 @@ export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
           </Card>
         </div>
       </div>
+
+      {/* --- Visualizador de Apresentação Condicional --- */}
+      {mostrarApresentacao && (
+        <ApresentacaoViewer 
+          totalSlides={31} // Certifique-se que este número está correto
+          onClose={() => setMostrarApresentacao(false)} 
+        />
+      )}
+      {/* --- Fim do Visualizador --- */}
+
     </div>
   );
 };
+
