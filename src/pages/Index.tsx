@@ -73,6 +73,54 @@ const Index = () => {
   const blueTeamPrize = winningTeamIsBlue ? winningTeamPrize : losingTeamPrize;
   const redTeamPrize = winningTeamIsBlue ? losingTeamPrize : winningTeamPrize;
 
+  // Mock ranking data with more detailed players
+  const mockBlueTeamPlayers = [
+    { name: 'Você', power: playerData.totalPower, stickers: 3, isPlayer: true },
+    { name: 'CaçadorDragões', power: 1250, stickers: 15, isPlayer: false },
+    { name: 'GuardianAzul', power: 1180, stickers: 12, isPlayer: false },
+    { name: 'MestreCards', power: 1050, stickers: 18, isPlayer: false },
+    { name: 'LendaAzul', power: 980, stickers: 8, isPlayer: false },
+    { name: 'VikingAzul', power: 920, stickers: 14, isPlayer: false },
+    { name: 'ArqueiroMístico', power: 880, stickers: 11, isPlayer: false },
+    { name: 'PaladinoReal', power: 850, stickers: 13, isPlayer: false },
+    { name: 'MagoElemental', power: 820, stickers: 9, isPlayer: false },
+    { name: 'CavaleiroBravo', power: 790, stickers: 16, isPlayer: false },
+    // More players...
+    { name: 'NovatoAzul', power: 180, stickers: 5, isPlayer: false },
+    { name: 'ColetorIniciante', power: 150, stickers: 4, isPlayer: false },
+    { name: 'AprendizAzul', power: 120, stickers: 3, isPlayer: false },
+    { name: 'CaçadorNovato', power: 90, stickers: 2, isPlayer: false },
+    { name: 'InicianteAzul', power: 60, stickers: 3, isPlayer: false }
+  ].sort((a, b) => b.power - a.power);
+
+  const mockRedTeamPlayers = [
+    { name: 'DemônioVermelho', power: 1180, stickers: 14, isPlayer: false },
+    { name: 'SenhorFogo', power: 1120, stickers: 16, isPlayer: false },
+    { name: 'GuerreiroSombrio', power: 1080, stickers: 11, isPlayer: false },
+    { name: 'MestreVermelho', power: 1020, stickers: 13, isPlayer: false },
+    { name: 'BerserkerRubi', power: 950, stickers: 9, isPlayer: false },
+    { name: 'LâminaEscarlate', power: 890, stickers: 15, isPlayer: false },
+    { name: 'TitãVermelho', power: 860, stickers: 12, isPlayer: false },
+    { name: 'FenixCarmesim', power: 830, stickers: 10, isPlayer: false },
+    { name: 'DragonVermelho', power: 800, stickers: 17, isPlayer: false },
+    { name: 'LordeSombrio', power: 770, stickers: 8, isPlayer: false },
+    // More players...
+    { name: 'NovatoVermelho', power: 160, stickers: 4, isPlayer: false },
+    { name: 'InicianteRubi', power: 140, stickers: 5, isPlayer: false },
+    { name: 'AprendizVermelho', power: 110, stickers: 3, isPlayer: false },
+    { name: 'CaçadorIniciante', power: 80, stickers: 2, isPlayer: false },
+    { name: 'NovoVermelho', power: 50, stickers: 2, isPlayer: false }
+  ].sort((a, b) => b.power - a.power);
+
+  // Calculate player rankings
+  const playerInBlueTeam = playerData.team === 'blue';
+  const playerTeamPlayers = playerInBlueTeam ? mockBlueTeamPlayers : mockRedTeamPlayers;
+  const playerTeamRanking = playerTeamPlayers.findIndex(p => p.isPlayer) + 1;
+
+  // Calculate general ranking (all players from both teams)
+  const allPlayers = [...mockBlueTeamPlayers, ...mockRedTeamPlayers].sort((a, b) => b.power - a.power);
+  const playerGeneralRanking = allPlayers.findIndex(p => p.isPlayer) + 1;
+
   const renderCollectionPage = () => (
     <div className="min-h-screen pt-20 pb-8 px-4">
       <div className="max-w-6xl mx-auto">
@@ -138,6 +186,34 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Player Info Card */}
+        <Card className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm border-purple-300/30 text-white mb-6">
+          <div className="p-6">
+            <div className="text-center mb-4">
+              <Trophy className="w-12 h-12 mx-auto mb-2 text-yellow-300" />
+              <h3 className="text-2xl font-bold text-yellow-300">Sua Classificação</h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+              <div className="bg-white/10 rounded-lg p-3">
+                <h4 className="font-bold text-purple-300">Ranking Geral</h4>
+                <p className="text-2xl font-bold text-yellow-300">#{playerGeneralRanking}</p>
+                <p className="text-sm text-purple-100">de {allPlayers.length} jogadores</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-3">
+                <h4 className="font-bold text-blue-300">No Seu Time</h4>
+                <p className="text-2xl font-bold text-blue-300">#{playerTeamRanking}</p>
+                <p className="text-sm text-purple-100">de {playerTeamPlayers.length} do time {playerData.team === 'blue' ? 'azul' : 'vermelho'}</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-3">
+                <h4 className="font-bold text-green-300">Seu Poder</h4>
+                <p className="text-2xl font-bold text-green-300">{playerData.totalPower}</p>
+                <p className="text-sm text-purple-100">{mockStickers.length} figurinhas</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
         {/* Prize Pool Info */}
         <Card className="bg-gradient-to-r from-yellow-600/20 to-orange-600/20 backdrop-blur-sm border-yellow-300/30 text-white mb-6">
           <div className="p-6">
@@ -188,21 +264,25 @@ const Index = () => {
                   <span className="font-bold text-blue-300">R$ {blueTeamPrize.toLocaleString()}</span>
                 </div>
               </div>
-              <div className="space-y-3">
-                {[1, 2, 3, 4, 5].map((position) => {
-                  const playerPower = 1000 - position * 50;
-                  const playerPercentage = playerPower / mockSeasonData.blueTeamPower;
+              <div className="space-y-2 max-h-80 overflow-y-auto">
+                {mockBlueTeamPlayers.slice(0, 10).map((player, index) => {
+                  const playerPercentage = player.power / mockSeasonData.blueTeamPower;
                   const playerPrize = blueTeamPrize * playerPercentage;
                   
                   return (
-                    <div key={position} className="flex items-center justify-between bg-white/5 rounded-lg p-3">
+                    <div key={index} className={`flex items-center justify-between rounded-lg p-3 ${player.isPlayer ? 'bg-yellow-500/20 border border-yellow-500/30' : 'bg-white/5'}`}>
                       <div className="flex items-center gap-3">
-                        <Badge variant="outline" className="text-yellow-400 border-yellow-400">
-                          #{position}
+                        <Badge variant="outline" className={`${player.isPlayer ? 'text-yellow-300 border-yellow-300' : 'text-yellow-400 border-yellow-400'}`}>
+                          #{index + 1}
                         </Badge>
                         <div>
-                          <span className="block">Jogador {position}</span>
-                          <span className="text-sm text-purple-100">{playerPower} poder</span>
+                          <span className={`block ${player.isPlayer ? 'font-bold text-yellow-300' : ''}`}>
+                            {player.name}
+                            {player.isPlayer && ' (Você)'}
+                          </span>
+                          <span className="text-sm text-purple-100">
+                            {player.power} poder • {player.stickers} figurinhas
+                          </span>
                         </div>
                       </div>
                       <div className="text-right">
@@ -239,21 +319,22 @@ const Index = () => {
                   <span className="font-bold text-red-300">R$ {redTeamPrize.toLocaleString()}</span>
                 </div>
               </div>
-              <div className="space-y-3">
-                {[1, 2, 3, 4, 5].map((position) => {
-                  const playerPower = 950 - position * 45;
-                  const playerPercentage = playerPower / mockSeasonData.redTeamPower;
+              <div className="space-y-2 max-h-80 overflow-y-auto">
+                {mockRedTeamPlayers.slice(0, 10).map((player, index) => {
+                  const playerPercentage = player.power / mockSeasonData.redTeamPower;
                   const playerPrize = redTeamPrize * playerPercentage;
                   
                   return (
-                    <div key={position} className="flex items-center justify-between bg-white/5 rounded-lg p-3">
+                    <div key={index} className="flex items-center justify-between bg-white/5 rounded-lg p-3">
                       <div className="flex items-center gap-3">
                         <Badge variant="outline" className="text-yellow-400 border-yellow-400">
-                          #{position}
+                          #{index + 1}
                         </Badge>
                         <div>
-                          <span className="block">Jogador {position}</span>
-                          <span className="text-sm text-purple-100">{playerPower} poder</span>
+                          <span className="block">{player.name}</span>
+                          <span className="text-sm text-purple-100">
+                            {player.power} poder • {player.stickers} figurinhas
+                          </span>
                         </div>
                       </div>
                       <div className="text-right">
