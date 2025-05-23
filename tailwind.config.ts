@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				rarity: {
+					common: '#9CA3AF',
+					uncommon: '#10B981',
+					rare: '#3B82F6',
+					epic: '#8B5CF6',
+					mythic: '#F59E0B'
 				}
 			},
 			borderRadius: {
@@ -84,11 +92,33 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'glow': {
+					'0%, 100%': { boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' },
+					'50%': { boxShadow: '0 0 30px rgba(139, 92, 246, 0.6)' }
+				},
+				'shine': {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(100%)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
+				'shine': 'shine 2s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'gradient-rarity-common': 'linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%)',
+				'gradient-rarity-uncommon': 'linear-gradient(135deg, #D1FAE5 0%, #10B981 100%)',
+				'gradient-rarity-rare': 'linear-gradient(135deg, #DBEAFE 0%, #3B82F6 100%)',
+				'gradient-rarity-epic': 'linear-gradient(135deg, #EDE9FE 0%, #8B5CF6 100%)',
+				'gradient-rarity-mythic': 'linear-gradient(135deg, #FEF3C7 0%, #F59E0B 100%)',
 			}
 		}
 	},
