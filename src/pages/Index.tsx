@@ -43,39 +43,8 @@ const Index = () => {
     }
   ];
 
-  // Player data
-  const playerData = {
-    team: 'blue' as const,
-    ranking: 15,
-    totalPower: mockStickers.reduce((sum, sticker) => sum + sticker.power, 0)
-  };
-
-  // Mock season data with prize pool calculations
-  const mockSeasonData = {
-    totalSales: 150000, // R$ 150,000 in sales (50,000 loot boxes sold)
-    totalPrizePool: 75000, // 50% of sales goes to prize pool
-    blueTeamPower: 125000,
-    redTeamPower: 118000,
-    daysLeft: 23
-  };
-
-  // Calculate prize distribution
-  const totalPower = mockSeasonData.blueTeamPower + mockSeasonData.redTeamPower;
-  const blueTeamPercentage = mockSeasonData.blueTeamPower / totalPower;
-  const redTeamPercentage = mockSeasonData.redTeamPower / totalPower;
-  
-  // Prize pool distribution (based on the document)
-  const winningTeamIsBlue = mockSeasonData.blueTeamPower > mockSeasonData.redTeamPower;
-  const winningTeamPrize = mockSeasonData.totalPrizePool * 0.5; // 25% of total sales = 50% of prize pool
-  const losingTeamPrize = mockSeasonData.totalPrizePool * 0.333; // 16.67% of total sales = 33.3% of prize pool
-  const nextSeasonBonus = mockSeasonData.totalPrizePool * 0.167; // 8.33% of total sales = 16.7% of prize pool
-
-  const blueTeamPrize = winningTeamIsBlue ? winningTeamPrize : losingTeamPrize;
-  const redTeamPrize = winningTeamIsBlue ? losingTeamPrize : winningTeamPrize;
-
-  // Mock ranking data with more detailed players
+  // Mock blue team players - placing player with proper ranking
   const mockBlueTeamPlayers = [
-    { name: 'Você', power: playerData.totalPower, stickers: 3, isPlayer: true },
     { name: 'CaçadorDragões', power: 1250, stickers: 15, isPlayer: false },
     { name: 'GuardianAzul', power: 1180, stickers: 12, isPlayer: false },
     { name: 'MestreCards', power: 1050, stickers: 18, isPlayer: false },
@@ -85,7 +54,12 @@ const Index = () => {
     { name: 'PaladinoReal', power: 850, stickers: 13, isPlayer: false },
     { name: 'MagoElemental', power: 820, stickers: 9, isPlayer: false },
     { name: 'CavaleiroBravo', power: 790, stickers: 16, isPlayer: false },
-    // More players...
+    { name: 'ArqueiroAzul', power: 750, stickers: 10, isPlayer: false },
+    { name: 'GuerreiroPrata', power: 720, stickers: 12, isPlayer: false },
+    { name: 'CaçadorRaro', power: 680, stickers: 9, isPlayer: false },
+    { name: 'MagoBrilhante', power: 650, stickers: 11, isPlayer: false },
+    { name: 'EscudeiroReal', power: 620, stickers: 8, isPlayer: false },
+    { name: 'Você', power: 260, stickers: 3, isPlayer: true }, // Player at 15th position
     { name: 'NovatoAzul', power: 180, stickers: 5, isPlayer: false },
     { name: 'ColetorIniciante', power: 150, stickers: 4, isPlayer: false },
     { name: 'AprendizAzul', power: 120, stickers: 3, isPlayer: false },
@@ -104,7 +78,6 @@ const Index = () => {
     { name: 'FenixCarmesim', power: 830, stickers: 10, isPlayer: false },
     { name: 'DragonVermelho', power: 800, stickers: 17, isPlayer: false },
     { name: 'LordeSombrio', power: 770, stickers: 8, isPlayer: false },
-    // More players...
     { name: 'NovatoVermelho', power: 160, stickers: 4, isPlayer: false },
     { name: 'InicianteRubi', power: 140, stickers: 5, isPlayer: false },
     { name: 'AprendizVermelho', power: 110, stickers: 3, isPlayer: false },
@@ -112,14 +85,43 @@ const Index = () => {
     { name: 'NovoVermelho', power: 50, stickers: 2, isPlayer: false }
   ].sort((a, b) => b.power - a.power);
 
-  // Calculate player rankings
-  const playerInBlueTeam = playerData.team === 'blue';
-  const playerTeamPlayers = playerInBlueTeam ? mockBlueTeamPlayers : mockRedTeamPlayers;
-  const playerTeamRanking = playerTeamPlayers.findIndex(p => p.isPlayer) + 1;
+  // Mock season data with prize pool calculations
+  const mockSeasonData = {
+    totalSales: 150000, // R$ 150,000 in sales (50,000 loot boxes sold)
+    totalPrizePool: 75000, // 50% of sales goes to prize pool
+    blueTeamPower: mockBlueTeamPlayers.reduce((sum, player) => sum + player.power, 0),
+    redTeamPower: mockRedTeamPlayers.reduce((sum, player) => sum + player.power, 0),
+    daysLeft: 23
+  };
 
-  // Calculate general ranking (all players from both teams)
+  // Find player in the blue team and get ranking
+  const playerTeamRanking = mockBlueTeamPlayers.findIndex(p => p.isPlayer) + 1;
+  
+  // Get player's data
+  const playerData = {
+    team: 'blue' as const, // Player is in blue team
+    ranking: playerTeamRanking, // Consistent ranking across all pages
+    stickers: mockStickers.length,
+    totalPower: mockStickers.reduce((sum, sticker) => sum + sticker.power, 0)
+  };
+
+  // Calculate all players for general ranking
   const allPlayers = [...mockBlueTeamPlayers, ...mockRedTeamPlayers].sort((a, b) => b.power - a.power);
   const playerGeneralRanking = allPlayers.findIndex(p => p.isPlayer) + 1;
+
+  // Calculate prize distribution
+  const totalPower = mockSeasonData.blueTeamPower + mockSeasonData.redTeamPower;
+  const blueTeamPercentage = mockSeasonData.blueTeamPower / totalPower;
+  const redTeamPercentage = mockSeasonData.redTeamPower / totalPower;
+  
+  // Prize pool distribution (based on the document)
+  const winningTeamIsBlue = mockSeasonData.blueTeamPower > mockSeasonData.redTeamPower;
+  const winningTeamPrize = mockSeasonData.totalPrizePool * 0.5; // 25% of total sales = 50% of prize pool
+  const losingTeamPrize = mockSeasonData.totalPrizePool * 0.333; // 16.67% of total sales = 33.3% of prize pool
+  const nextSeasonBonus = mockSeasonData.totalPrizePool * 0.167; // 8.33% of total sales = 16.7% of prize pool
+
+  const blueTeamPrize = winningTeamIsBlue ? winningTeamPrize : losingTeamPrize;
+  const redTeamPrize = winningTeamIsBlue ? losingTeamPrize : winningTeamPrize;
 
   const renderCollectionPage = () => (
     <div className="min-h-screen pt-20 pb-8 px-4">
@@ -142,7 +144,7 @@ const Index = () => {
           <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
             <div className="p-6 text-center">
               <Package className="w-12 h-12 mx-auto mb-4 text-blue-400" />
-              <h3 className="text-2xl font-bold text-blue-400">{mockStickers.length}</h3>
+              <h3 className="text-2xl font-bold text-blue-400">{playerData.stickers}</h3>
               <p className="text-purple-100">Figurinhas</p>
             </div>
           </Card>
@@ -160,7 +162,7 @@ const Index = () => {
           <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
             <div className="p-6 text-center">
               <Users className="w-12 h-12 mx-auto mb-4 text-green-400" />
-              <h3 className="text-2xl font-bold text-green-400">#{playerData.ranking}</h3>
+              <h3 className="text-2xl font-bold text-green-400">#{playerTeamRanking} (time) / #{playerGeneralRanking} (geral)</h3>
               <p className="text-purple-100">Ranking</p>
             </div>
           </Card>
@@ -402,7 +404,7 @@ const Index = () => {
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={setCurrentPage} playerData={playerData} />;
+        return <HomePage onNavigate={setCurrentPage} playerData={{...playerData, generalRanking: playerGeneralRanking}} />;
       case 'store':
         return <StorePage />;
       case 'collection':
@@ -414,7 +416,7 @@ const Index = () => {
       case 'profile':
         return renderProfilePage();
       default:
-        return <HomePage onNavigate={setCurrentPage} playerData={playerData} />;
+        return <HomePage onNavigate={setCurrentPage} playerData={{...playerData, generalRanking: playerGeneralRanking}} />;
     }
   };
 

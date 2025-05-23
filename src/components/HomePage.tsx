@@ -17,6 +17,7 @@ interface HomePageProps {
   playerData: {
     team: 'blue' | 'red';
     ranking: number;
+    generalRanking: number;
     totalPower: number;
   };
 }
@@ -96,7 +97,7 @@ export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
                   <Trophy className="w-6 h-6 text-yellow-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-yellow-400">
-                  #{playerData.ranking}
+                  #{playerData.ranking} (time) / #{playerData.generalRanking} (geral)
                 </h3>
                 <p className="text-purple-100">Seu Ranking</p>
                 <Badge className={`mt-1 ${playerData.team === 'blue' ? 'bg-blue-500' : 'bg-red-500'} text-white text-xs`}>
