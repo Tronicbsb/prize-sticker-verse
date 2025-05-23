@@ -1,11 +1,10 @@
-
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { LootBox } from './LootBox';
 import { StickerCard } from './StickerCard';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Sticker } from '@/types';
+import { Sticker, Rarity } from '@/types';
 import { Gift, Sparkles, X } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -28,12 +27,12 @@ export const StorePage = () => {
   };
 
   const generateRandomSticker = (): Sticker => {
-    const rarities = ['common', 'uncommon', 'rare', 'epic', 'mythic'] as const;
+    const rarities: Rarity[] = ['common', 'uncommon', 'rare', 'epic', 'mythic'];
     const probabilities = [57.5, 30, 10, 2, 0.5];
     
     const rand = Math.random() * 100;
     let acc = 0;
-    let selectedRarity = 'common' as const;
+    let selectedRarity: Rarity = 'common';
     
     for (let i = 0; i < probabilities.length; i++) {
       acc += probabilities[i];
@@ -43,7 +42,13 @@ export const StorePage = () => {
       }
     }
     
-    const powers = { common: 1, uncommon: 3, rare: 10, epic: 50, mythic: 200 };
+    const powers: Record<Rarity, number> = { 
+      common: 1, 
+      uncommon: 3, 
+      rare: 10, 
+      epic: 50, 
+      mythic: 200 
+    };
     const teams = ['blue', 'red'] as const;
     
     return {
