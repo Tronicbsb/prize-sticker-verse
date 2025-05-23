@@ -205,7 +205,7 @@ const Index = () => {
               <div className="bg-white/10 rounded-lg p-3">
                 <h4 className="font-bold text-blue-300">No Seu Time</h4>
                 <p className="text-2xl font-bold text-blue-300">#{playerTeamRanking}</p>
-                <p className="text-sm text-purple-100">de {playerTeamPlayers.length} do time {playerData.team === 'blue' ? 'azul' : 'vermelho'}</p>
+                <p className="text-sm text-purple-100">de {(playerData.team === 'blue' ? mockBlueTeamPlayers.length : mockRedTeamPlayers.length)} do time {playerData.team === 'blue' ? '(Time Azul)' : '(Time Vermelho)'}</p>
               </div>
               <div className="bg-white/10 rounded-lg p-3">
                 <h4 className="font-bold text-green-300">Seu Poder</h4>
