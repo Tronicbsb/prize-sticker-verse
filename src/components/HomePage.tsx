@@ -14,9 +14,14 @@ import {
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
+  playerData: {
+    team: 'blue' | 'red';
+    ranking: number;
+    totalPower: number;
+  };
 }
 
-export const HomePage = ({ onNavigate }: HomePageProps) => {
+export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
   const currentSeason = {
     name: "Guerreiros Místicos",
     theme: "Fantasia Medieval",
@@ -91,9 +96,12 @@ export const HomePage = ({ onNavigate }: HomePageProps) => {
                   <Trophy className="w-6 h-6 text-yellow-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-yellow-400">
-                  #1
+                  #{playerData.ranking}
                 </h3>
                 <p className="text-purple-100">Seu Ranking</p>
+                <Badge className={`mt-1 ${playerData.team === 'blue' ? 'bg-blue-500' : 'bg-red-500'} text-white text-xs`}>
+                  {playerData.team === 'blue' ? 'Time Azul' : 'Time Vermelho'}
+                </Badge>
               </div>
             </div>
 
@@ -108,6 +116,9 @@ export const HomePage = ({ onNavigate }: HomePageProps) => {
                   <h4 className="font-bold text-blue-400">Time Azul</h4>
                   <p className="text-2xl font-bold">{currentSeason.blueTeamPower.toLocaleString()}</p>
                   <p className="text-sm text-purple-100">Poder Total</p>
+                  {playerData.team === 'blue' && (
+                    <Badge className="bg-blue-500 text-white text-xs mt-1">Seu Time</Badge>
+                  )}
                 </div>
                 <div className="text-center">
                   <div className="w-12 h-12 bg-red-500 rounded-full mx-auto mb-2 flex items-center justify-center">
@@ -116,6 +127,9 @@ export const HomePage = ({ onNavigate }: HomePageProps) => {
                   <h4 className="font-bold text-red-400">Time Vermelho</h4>
                   <p className="text-2xl font-bold">{currentSeason.redTeamPower.toLocaleString()}</p>
                   <p className="text-sm text-purple-100">Poder Total</p>
+                  {playerData.team === 'red' && (
+                    <Badge className="bg-red-500 text-white text-xs mt-1">Seu Time</Badge>
+                  )}
                 </div>
               </div>
             </div>

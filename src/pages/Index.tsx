@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { HomePage } from '@/components/HomePage';
@@ -42,6 +43,13 @@ const Index = () => {
     }
   ];
 
+  // Player data
+  const playerData = {
+    team: 'blue' as const,
+    ranking: 15,
+    totalPower: mockStickers.reduce((sum, sticker) => sum + sticker.power, 0)
+  };
+
   // Mock season data with prize pool calculations
   const mockSeasonData = {
     totalSales: 150000, // R$ 150,000 in sales (50,000 loot boxes sold)
@@ -73,6 +81,12 @@ const Index = () => {
           <p className="text-xl text-purple-100 mb-6">
             Suas figurinhas e estatísticas
           </p>
+          {/* Player Team Info */}
+          <div className="flex justify-center mb-4">
+            <Badge className={`${playerData.team === 'blue' ? 'bg-blue-500' : 'bg-red-500'} text-white px-4 py-2`}>
+              {playerData.team === 'blue' ? '🔵 Time Azul' : '🔴 Time Vermelho'}
+            </Badge>
+          </div>
         </div>
 
         {/* Stats */}
@@ -89,7 +103,7 @@ const Index = () => {
             <div className="p-6 text-center">
               <Trophy className="w-12 h-12 mx-auto mb-4 text-yellow-400" />
               <h3 className="text-2xl font-bold text-yellow-400">
-                {mockStickers.reduce((sum, sticker) => sum + sticker.power, 0)}
+                {playerData.totalPower}
               </h3>
               <p className="text-purple-100">Poder Total</p>
             </div>
@@ -98,7 +112,7 @@ const Index = () => {
           <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
             <div className="p-6 text-center">
               <Users className="w-12 h-12 mx-auto mb-4 text-green-400" />
-              <h3 className="text-2xl font-bold text-green-400">#15</h3>
+              <h3 className="text-2xl font-bold text-green-400">#{playerData.ranking}</h3>
               <p className="text-purple-100">Ranking</p>
             </div>
           </Card>
@@ -307,7 +321,7 @@ const Index = () => {
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={setCurrentPage} />;
+        return <HomePage onNavigate={setCurrentPage} playerData={playerData} />;
       case 'store':
         return <StorePage />;
       case 'collection':
@@ -319,7 +333,7 @@ const Index = () => {
       case 'profile':
         return renderProfilePage();
       default:
-        return <HomePage onNavigate={setCurrentPage} />;
+        return <HomePage onNavigate={setCurrentPage} playerData={playerData} />;
     }
   };
 
