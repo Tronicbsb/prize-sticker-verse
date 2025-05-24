@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'; // <-- Added useState import
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -40,6 +41,15 @@ export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
   return (
     <div className="min-h-screen pt-20 pb-8 px-4">
       <div className="max-w-6xl mx-auto space-y-6">
+        {/* Banner Section */}
+        <div className="w-full max-w-4xl mx-auto mb-6">
+          <img 
+            src="/lovable-uploads/c996ba45-113d-4654-9def-edcb642af8a5.png" 
+            alt="Banner Guerreiros Místicos" 
+            className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg border-2 border-white/20"
+          />
+        </div>
+
         {/* Hero Section */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
@@ -208,4 +218,3 @@ export const HomePage = ({ onNavigate, playerData }: HomePageProps) => {
     </div>
   );
 };
-
