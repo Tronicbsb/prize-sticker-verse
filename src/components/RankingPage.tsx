@@ -14,23 +14,58 @@ interface RankingPageProps {
 }
 
 export const RankingPage = ({ playerData }: RankingPageProps) => {
-  const mockTeamRanking = [
-    { rank: 1, name: 'DragonMaster', power: 12500, team: playerData.team },
-    { rank: 2, name: 'LegendHunter', power: 11800, team: playerData.team },
-    { rank: 3, name: 'MysticWarrior', power: 11200, team: playerData.team },
-    { rank: 4, name: 'ShadowBlade', power: 10900, team: playerData.team },
-    { rank: 5, name: 'FireMage', power: 10500, team: playerData.team },
-    { rank: playerData.ranking, name: 'Você', power: playerData.totalPower, team: playerData.team, isPlayer: true },
-  ];
+  // Generate realistic team ranking based on player's actual power
+  const generateTeamRanking = () => {
+    const baseRanking = [
+      { rank: 1, name: 'DragonMaster', power: 850, team: playerData.team },
+      { rank: 2, name: 'LegendHunter', power: 720, team: playerData.team },
+      { rank: 3, name: 'MysticWarrior', power: 680, team: playerData.team },
+      { rank: 4, name: 'ShadowBlade', power: 620, team: playerData.team },
+      { rank: 5, name: 'FireMage', power: 580, team: playerData.team },
+      { rank: 6, name: 'IceQueen', power: 540, team: playerData.team },
+      { rank: 7, name: 'StormLord', power: 500, team: playerData.team },
+      { rank: 8, name: 'Você', power: playerData.totalPower, team: playerData.team, isPlayer: true },
+      { rank: 9, name: 'DarkKnight', power: 420, team: playerData.team },
+      { rank: 10, name: 'LightBringer', power: 380, team: playerData.team },
+    ];
 
-  const mockGeneralRanking = [
-    { rank: 1, name: 'UltimateCollector', power: 15000, team: 'red' as const },
-    { rank: 2, name: 'CardMaster', power: 14500, team: 'blue' as const },
-    { rank: 3, name: 'LegendSeeker', power: 14200, team: 'red' as const },
-    { rank: 4, name: 'MythicHunter', power: 13800, team: 'blue' as const },
-    { rank: 5, name: 'EpicCollector', power: 13500, team: 'red' as const },
-    { rank: playerData.generalRanking, name: 'Você', power: playerData.totalPower, team: playerData.team, isPlayer: true },
-  ];
+    // Sort by power and reassign ranks
+    const sorted = baseRanking.sort((a, b) => b.power - a.power);
+    return sorted.map((player, index) => ({ ...player, rank: index + 1 }));
+  };
+
+  const generateGeneralRanking = () => {
+    const baseRanking = [
+      { rank: 1, name: 'UltimateCollector', power: 950, team: 'red' as const },
+      { rank: 2, name: 'CardMaster', power: 900, team: 'blue' as const },
+      { rank: 3, name: 'LegendSeeker', power: 875, team: 'red' as const },
+      { rank: 4, name: 'MythicHunter', power: 850, team: 'blue' as const },
+      { rank: 5, name: 'EpicCollector', power: 820, team: 'red' as const },
+      { rank: 6, name: 'RareHunter', power: 780, team: 'blue' as const },
+      { rank: 7, name: 'PowerSeeker', power: 750, team: 'red' as const },
+      { rank: 8, name: 'GoldCollector', power: 720, team: 'blue' as const },
+      { rank: 9, name: 'SilverMaster', power: 680, team: 'red' as const },
+      { rank: 10, name: 'BronzeKing', power: 650, team: 'blue' as const },
+      { rank: 11, name: 'StickerLord', power: 620, team: 'red' as const },
+      { rank: 12, name: 'CardWizard', power: 580, team: 'blue' as const },
+      { rank: 13, name: 'AlbumMaster', power: 540, team: 'red' as const },
+      { rank: 14, name: 'CollectionPro', power: 500, team: 'blue' as const },
+      { rank: 15, name: 'Você', power: playerData.totalPower, team: playerData.team, isPlayer: true },
+      { rank: 16, name: 'TradingExpert', power: 420, team: 'red' as const },
+      { rank: 17, name: 'PackOpener', power: 380, team: 'blue' as const },
+    ];
+
+    // Sort by power and reassign ranks
+    const sorted = baseRanking.sort((a, b) => b.power - a.power);
+    return sorted.map((player, index) => ({ ...player, rank: index + 1 }));
+  };
+
+  const teamRanking = generateTeamRanking();
+  const generalRanking = generateGeneralRanking();
+
+  // Find player's actual position
+  const playerTeamRank = teamRanking.find(p => p.isPlayer)?.rank || playerData.ranking;
+  const playerGeneralRank = generalRanking.find(p => p.isPlayer)?.rank || playerData.generalRanking;
 
   const getRankIcon = (rank: number) => {
     switch (rank) {
@@ -59,7 +94,7 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
           </p>
         </div>
 
-        {/* Player Stats */}
+        {/* Player Stats - Updated with actual calculated values */}
         <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
           <div className="p-6">
             <h2 className="text-2xl font-bold mb-4">Suas Estatísticas</h2>
@@ -75,7 +110,7 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
                 <div className="flex items-center justify-center mb-2">
                   <Trophy className="w-6 h-6 text-yellow-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-yellow-400">#{playerData.ranking}</h3>
+                <h3 className="text-2xl font-bold text-yellow-400">#{playerTeamRank}</h3>
                 <p className="text-purple-100">Ranking do Time</p>
               </div>
               
@@ -83,7 +118,7 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
                 <div className="flex items-center justify-center mb-2">
                   <Users className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-blue-400">#{playerData.generalRanking}</h3>
+                <h3 className="text-2xl font-bold text-blue-400">#{playerGeneralRank}</h3>
                 <p className="text-purple-100">Ranking Geral</p>
               </div>
               
@@ -110,9 +145,9 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
                 Ranking do Time
               </h2>
               <div className="space-y-3">
-                {mockTeamRanking.slice(0, 6).map((player) => (
+                {teamRanking.slice(0, 10).map((player) => (
                   <div
-                    key={player.rank}
+                    key={`team-${player.rank}`}
                     className={`flex items-center justify-between p-3 rounded-lg ${
                       player.isPlayer ? 'bg-purple-600/30 border border-purple-400' : 'bg-white/5'
                     }`}
@@ -138,9 +173,9 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
             <div className="p-6">
               <h2 className="text-2xl font-bold mb-4">Ranking Geral</h2>
               <div className="space-y-3">
-                {mockGeneralRanking.slice(0, 6).map((player) => (
+                {generalRanking.slice(0, 10).map((player) => (
                   <div
-                    key={player.rank}
+                    key={`general-${player.rank}`}
                     className={`flex items-center justify-between p-3 rounded-lg ${
                       player.isPlayer ? 'bg-purple-600/30 border border-purple-400' : 'bg-white/5'
                     }`}
