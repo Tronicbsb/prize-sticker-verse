@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Trophy, Star, Users, TrendingUp } from 'lucide-react';
+import { StickerCard } from '@/components/StickerCard';
+import { Sticker } from '@/types';
 
 interface CollectionPageProps {
   onNavigate: (page: string) => void;
@@ -16,6 +18,40 @@ interface CollectionPageProps {
 }
 
 export const CollectionPage = ({ onNavigate, playerData }: CollectionPageProps) => {
+  // Mock stickers collection with the uploaded images
+  const playerStickers: Sticker[] = [
+    {
+      id: '1',
+      name: 'CAVALEIRO DOURADO',
+      image: '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
+      rarity: 'epic',
+      power: 50,
+      theme: 'Guerreiros',
+      team: playerData.team, // Same team as player
+      description: 'Um valoroso cavaleiro com armadura dourada'
+    },
+    {
+      id: '2',
+      name: 'ANCESTRAL DRAGON',
+      image: '/lovable-uploads/3b0c09a4-91c2-442e-86b5-98c21b578549.png',
+      rarity: 'mythic',
+      power: 200,
+      theme: 'Dragões',
+      team: playerData.team === 'blue' ? 'red' : 'blue', // Opposite team
+      description: 'Um dragão ancestral de imenso poder'
+    },
+    {
+      id: '3',
+      name: 'MAGO DAS SOMBRAS',
+      image: '/lovable-uploads/baaec923-37bb-45ba-a83f-ffe612b643de.png',
+      rarity: 'rare',
+      power: 10,
+      theme: 'Magia',
+      team: playerData.team, // Same team as player
+      description: 'Mestre das artes sombrias'
+    }
+  ];
+
   return (
     <div className="min-h-screen pt-20 pb-8 px-4">
       <div className="max-w-6xl mx-auto space-y-6">
@@ -111,14 +147,19 @@ export const CollectionPage = ({ onNavigate, playerData }: CollectionPageProps) 
           </Card>
         </div>
 
-        {/* Collection Grid Placeholder */}
+        {/* Collection Grid */}
         <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
           <div className="p-6">
             <h2 className="text-2xl font-bold mb-4">Suas Figurinhas</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 min-h-[300px]">
-              <div className="bg-white/5 rounded-lg p-4 flex items-center justify-center">
-                <p className="text-purple-100 text-center">Suas figurinhas aparecerão aqui</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
+              {playerStickers.map((sticker) => (
+                <StickerCard 
+                  key={sticker.id} 
+                  sticker={sticker}
+                  playerTeam={playerData.team}
+                  className="w-full max-w-sm mx-auto"
+                />
+              ))}
             </div>
           </div>
         </Card>

@@ -10,6 +10,7 @@ interface StickerCardProps {
   onClick?: () => void;
   className?: string;
   showPower?: boolean;
+  playerTeam?: 'blue' | 'red';
 }
 
 const rarityGradients = {
@@ -28,15 +29,18 @@ const rarityColors = {
   mythic: 'text-amber-600'
 };
 
-export const StickerCard = ({ sticker, onClick, className, showPower = true }: StickerCardProps) => {
+export const StickerCard = ({ sticker, onClick, className, showPower = true, playerTeam }: StickerCardProps) => {
   const rarityClass = rarityGradients[sticker.rarity];
   const textColor = rarityColors[sticker.rarity];
+  
+  // Calculate if card is from opposite team and reduce power
+  const isOppositeTeam = playerTeam && sticker.team !== playerTeam;
+  const effectivePower = isOppositeTeam ? Math.floor(sticker.power / 2) : sticker.power;
   
   return (
     <Card 
       className={cn(
-        "sticker-card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg",
-        rarityClass,
+        "sticker-card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white/90",
         sticker.rarity === 'mythic' && 'animate-glow',
         className
       )}
@@ -49,9 +53,13 @@ export const StickerCard = ({ sticker, onClick, className, showPower = true }: S
           sticker.team === 'blue' ? 'bg-blue-500' : 'bg-red-500'
         )} />
         
-        {/* Sticker image placeholder */}
-        <div className="w-full h-32 bg-white/20 rounded-lg mb-3 flex items-center justify-center">
-          <Star className={cn("w-12 h-12", textColor)} />
+        {/* Sticker image */}
+        <div className="w-full h-48 mb-3 flex items-center justify-center overflow-hidden rounded-lg">
+          <img 
+            src={sticker.image} 
+            alt={sticker.name}
+            className="w-full h-full object-cover"
+          />
         </div>
         
         {/* Sticker name */}
@@ -62,12 +70,24 @@ export const StickerCard = ({ sticker, onClick, className, showPower = true }: S
           {sticker.rarity}
         </Badge>
         
-        {/* Power display */}
+        {/* Power display with reduction logic */}
         {showPower && (
           <div className="flex items-center justify-center gap-1">
             <Zap className="w-4 h-4 text-yellow-500" />
-            <span className="font-semibold text-gray-800">{sticker.power}</span>
+            {isOppositeTeam ? (
+              <div className="flex items-center gap-1">
+                <span className="font-semibold text-gray-500 line-through">{sticker.power}</span>
+                <span className="font-semibold text-red-600">{effectivePower}</span>
+              </div>
+            ) : (
+              <span className="font-semibold text-gray-800">{sticker.power}</span>
+            )}
           </div>
+        )}
+        
+        {/* Opposite team indicator */}
+        {isOppositeTeam && (
+          <p className="text-xs text-red-600 mt-1">Poder reduzido (time oposto)</p>
         )}
       </div>
     </Card>
