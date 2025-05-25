@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Star, Users, Crown, Medal, Award, DollarSign, Cards, Percent } from 'lucide-react';
+import { Trophy, Star, Users, Crown, Medal, Award, DollarSign, CreditCard, Percent } from 'lucide-react';
 
 interface RankingPageProps {
   playerData: {
@@ -164,7 +164,7 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white/5 rounded-lg p-4">
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
-                  <Cards className="w-6 h-6 text-purple-400" />
+                  <CreditCard className="w-6 h-6 text-purple-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-purple-400">{totalCards}/{totalPossibleCards}</h3>
                 <p className="text-purple-100">Cartas Coletadas</p>

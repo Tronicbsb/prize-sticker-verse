@@ -29,9 +29,20 @@ const rarityColors = {
   mythic: 'text-amber-600'
 };
 
+// Map sticker names to their images
+const stickerImages = {
+  'Guerreiro Sombrio': '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
+  'Mago Elemental': '/lovable-uploads/baaec923-37bb-45ba-a83f-ffe612b643de.png',
+  'Dragão Ancestral': '/lovable-uploads/3b0c09a4-91c2-442e-86b5-98c21b578549.png',
+  'Arqueiro Élfico': '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
+  'Cavaleiro Dourado': '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
+  'Feitiço Cósmico': '/lovable-uploads/baaec923-37bb-45ba-a83f-ffe612b643de.png'
+};
+
 export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardProps) => {
   const rarityClass = rarityGradients[listing.stickerRarity];
   const textColor = rarityColors[listing.stickerRarity];
+  const stickerImage = stickerImages[listing.stickerName as keyof typeof stickerImages];
 
   const formatTimeLeft = (hours: number) => {
     if (hours < 1) return `${Math.round(hours * 60)}m`;
@@ -67,9 +78,17 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
           )}
         </div>
 
-        {/* Sticker image placeholder */}
-        <div className="w-full h-32 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6">
-          <Star className={cn("w-12 h-12", textColor)} />
+        {/* Sticker image */}
+        <div className="w-full h-32 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden">
+          {stickerImage ? (
+            <img 
+              src={stickerImage} 
+              alt={listing.stickerName}
+              className="w-full h-full object-cover rounded-lg"
+            />
+          ) : (
+            <Star className={cn("w-12 h-12", textColor)} />
+          )}
         </div>
         
         {/* Sticker info */}
