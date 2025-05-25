@@ -78,13 +78,13 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
           )}
         </div>
 
-        {/* Sticker image */}
-        <div className="w-full h-32 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden">
+        {/* Sticker image - Aumentado para melhor visualização */}
+        <div className="w-full h-40 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden p-2">
           {stickerImage ? (
             <img 
               src={stickerImage} 
               alt={listing.stickerName}
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-contain rounded-lg"
             />
           ) : (
             <Star className={cn("w-12 h-12", textColor)} />
@@ -145,7 +145,7 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
           ) : (
             <Button
               onClick={() => onBuyNow?.(listing.id)}
-              className="w-full bg-green-500 hover:bg-green-600 text-white"
+              className="w-full bg-green-500 hover:green-600 text-white"
               size="sm"
             >
               <DollarSign className="w-4 h-4 mr-1" />

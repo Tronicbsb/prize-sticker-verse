@@ -53,12 +53,12 @@ export const StickerCard = ({ sticker, onClick, className, showPower = true, pla
           sticker.team === 'blue' ? 'bg-blue-500' : 'bg-red-500'
         )} />
         
-        {/* Sticker image */}
-        <div className="w-full h-48 mb-3 flex items-center justify-center overflow-hidden rounded-lg">
+        {/* Sticker image - Melhorado para melhor visualização */}
+        <div className="w-full h-56 mb-3 flex items-center justify-center overflow-hidden rounded-lg bg-white/20 p-2">
           <img 
             src={sticker.image} 
             alt={sticker.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain rounded-lg"
           />
         </div>
         
