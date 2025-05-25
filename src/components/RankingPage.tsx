@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, Star, Users, Crown, Medal, Award } from 'lucide-react';
+import { Trophy, Star, Users, Crown, Medal, Award, DollarSign, Cards, Percent } from 'lucide-react';
 
 interface RankingPageProps {
   playerData: {
@@ -14,6 +13,36 @@ interface RankingPageProps {
 }
 
 export const RankingPage = ({ playerData }: RankingPageProps) => {
+  // Calculate player statistics
+  const totalCards = 6; // Player has 6 cards in collection
+  const totalPossibleCards = 50; // Total cards in the season
+  const completionPercentage = Math.round((totalCards / totalPossibleCards) * 100);
+  
+  // Prize pool calculations
+  const totalPrizePool = 75000;
+  const teamPrizePool = totalPrizePool * 0.6; // 60% for team prizes
+  const generalPrizePool = totalPrizePool * 0.4; // 40% for general prizes
+  
+  // Calculate prize participation based on ranking
+  const calculateTeamPrize = () => {
+    if (playerData.ranking <= 3) return teamPrizePool * 0.4; // Top 3 get 40%
+    if (playerData.ranking <= 10) return teamPrizePool * 0.35 / 7; // Next 7 share 35%
+    if (playerData.ranking <= 20) return teamPrizePool * 0.25 / 10; // Next 10 share 25%
+    return 0;
+  };
+
+  const calculateGeneralPrize = () => {
+    if (playerData.generalRanking <= 5) return generalPrizePool * 0.5; // Top 5 get 50%
+    if (playerData.generalRanking <= 15) return generalPrizePool * 0.3 / 10; // Next 10 share 30%
+    if (playerData.generalRanking <= 30) return generalPrizePool * 0.2 / 15; // Next 15 share 20%
+    return 0;
+  };
+
+  const estimatedTeamPrize = calculateTeamPrize();
+  const estimatedGeneralPrize = calculateGeneralPrize();
+  const totalEstimatedPrize = estimatedTeamPrize + estimatedGeneralPrize;
+  const prizeParticipationPercentage = ((totalEstimatedPrize / totalPrizePool) * 100).toFixed(2);
+
   // Generate realistic team ranking based on player's actual power
   const generateTeamRanking = () => {
     const baseRanking = [
@@ -29,7 +58,6 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
       { rank: 10, name: 'LightBringer', power: 380, team: playerData.team },
     ];
 
-    // Sort by power and reassign ranks
     const sorted = baseRanking.sort((a, b) => b.power - a.power);
     return sorted.map((player, index) => ({ ...player, rank: index + 1 }));
   };
@@ -55,7 +83,6 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
       { rank: 17, name: 'PackOpener', power: 380, team: 'blue' as const },
     ];
 
-    // Sort by power and reassign ranks
     const sorted = baseRanking.sort((a, b) => b.power - a.power);
     return sorted.map((player, index) => ({ ...player, rank: index + 1 }));
   };
@@ -94,11 +121,13 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
           </p>
         </div>
 
-        {/* Player Stats - Updated with actual calculated values */}
+        {/* Player Stats - Expanded with new statistics */}
         <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
           <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Suas Estatísticas</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <h2 className="text-2xl font-bold mb-6">Suas Estatísticas Detalhadas</h2>
+            
+            {/* Basic Stats Row */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="text-center">
                 <Badge className={`mb-2 ${playerData.team === 'blue' ? 'bg-blue-500' : 'bg-red-500'} text-white`}>
                   {playerData.team === 'blue' ? 'Time Azul' : 'Time Vermelho'}
@@ -128,6 +157,43 @@ export const RankingPage = ({ playerData }: RankingPageProps) => {
                 </div>
                 <h3 className="text-2xl font-bold text-green-400">{playerData.totalPower.toLocaleString()}</h3>
                 <p className="text-purple-100">Poder Total</p>
+              </div>
+            </div>
+
+            {/* Collection & Prize Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white/5 rounded-lg p-4">
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <Cards className="w-6 h-6 text-purple-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-purple-400">{totalCards}/{totalPossibleCards}</h3>
+                <p className="text-purple-100">Cartas Coletadas</p>
+                <Badge variant="outline" className="mt-1 text-xs border-purple-400 text-purple-200">
+                  {completionPercentage}% completo
+                </Badge>
+              </div>
+
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <DollarSign className="w-6 h-6 text-green-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-green-400">R$ {totalEstimatedPrize.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</h3>
+                <p className="text-purple-100">Prêmio Estimado</p>
+                <div className="text-xs text-purple-200 mt-1">
+                  <p>Time: R$ {estimatedTeamPrize.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                  <p>Geral: R$ {estimatedGeneralPrize.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <Percent className="w-6 h-6 text-orange-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-orange-400">{prizeParticipationPercentage}%</h3>
+                <p className="text-purple-100">Participação no Prize Pool</p>
+                <p className="text-xs text-purple-200 mt-1">
+                  de R$ {totalPrizePool.toLocaleString()}
+                </p>
               </div>
             </div>
           </div>
