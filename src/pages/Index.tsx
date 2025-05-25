@@ -6,6 +6,7 @@ import { CollectionPage } from "@/components/CollectionPage";
 import { RankingPage } from "@/components/RankingPage";
 import { StorePage } from "@/components/StorePage";
 import { MarketplacePage } from '@/components/MarketplacePage';
+import { ProfilePage } from '@/components/ProfilePage';
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState("home");
@@ -52,6 +53,8 @@ const Index = () => {
         return <StorePage />;
       case 'marketplace':
         return <MarketplacePage />;
+      case 'profile':
+        return <ProfilePage />;
       default:
         return <HomePage onNavigate={setCurrentPage} playerData={playerData} />;
     }
