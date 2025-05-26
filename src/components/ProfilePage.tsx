@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -131,10 +130,10 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-6">
+    <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header do Perfil */}
-        <Card className="mb-6 bg-white/10 backdrop-blur-md border-white/20">
+        <Card className="mb-6 bg-white border border-gray-200 shadow-sm">
           <CardContent className="p-6">
             <div className="flex flex-col md:flex-row items-center gap-6">
               <Avatar className="w-24 h-24">
@@ -144,34 +143,34 @@ export const ProfilePage = () => {
                 </AvatarFallback>
               </Avatar>
               
-              <div className="flex-1 text-center md:text-left text-white">
-                <h1 className="text-3xl font-bold mb-2">{mockPlayerProfile.name}</h1>
+              <div className="flex-1 text-center md:text-left">
+                <h1 className="text-3xl font-bold mb-2 text-gray-900">{mockPlayerProfile.name}</h1>
                 <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4">
                   <Badge className={`${mockPlayerProfile.team === 'blue' ? 'bg-blue-600' : 'bg-red-600'} text-white`}>
                     Time {mockPlayerProfile.team === 'blue' ? 'Azul' : 'Vermelho'}
                   </Badge>
-                  <Badge variant="secondary" className="bg-white/20 text-white">
+                  <Badge variant="secondary" className="bg-gray-100 text-gray-800">
                     <Trophy className="w-3 h-3 mr-1" />
                     {mockPlayerProfile.totalCards} cartas
                   </Badge>
-                  <Badge variant="secondary" className="bg-white/20 text-white">
+                  <Badge variant="secondary" className="bg-gray-100 text-gray-800">
                     <Zap className="w-3 h-3 mr-1" />
                     {mockPlayerProfile.totalPower} poder
                   </Badge>
                 </div>
-                <p className="text-gray-300">
+                <p className="text-gray-600">
                   <Calendar className="w-4 h-4 inline mr-2" />
                   Membro desde {formatDate(mockPlayerProfile.joinDate)}
                 </p>
               </div>
               
-              <div className="text-center text-white">
-                <div className="bg-green-600/20 rounded-lg p-4 mb-4">
-                  <PiggyBank className="w-8 h-8 mx-auto mb-2 text-green-400" />
-                  <div className="text-2xl font-bold text-green-400">
+              <div className="text-center">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                  <PiggyBank className="w-8 h-8 mx-auto mb-2 text-green-600" />
+                  <div className="text-2xl font-bold text-green-600">
                     {formatCurrency(mockPlayerProfile.balance)}
                   </div>
-                  <p className="text-sm text-gray-300">Saldo atual</p>
+                  <p className="text-sm text-gray-600">Saldo atual</p>
                 </div>
                 <Button className="bg-green-600 hover:bg-green-700 text-white">
                   Adicionar Saldo
@@ -183,14 +182,14 @@ export const ProfilePage = () => {
 
         {/* Tabs com informações detalhadas */}
         <Tabs defaultValue="stats" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-white/10 backdrop-blur-md">
-            <TabsTrigger value="stats" className="text-white data-[state=active]:bg-white/20">
+          <TabsList className="grid w-full grid-cols-3 bg-white border border-gray-200">
+            <TabsTrigger value="stats" className="text-gray-700 data-[state=active]:bg-gray-900 data-[state=active]:text-white">
               Estatísticas
             </TabsTrigger>
-            <TabsTrigger value="financial" className="text-white data-[state=active]:bg-white/20">
+            <TabsTrigger value="financial" className="text-gray-700 data-[state=active]:bg-gray-900 data-[state=active]:text-white">
               Financeiro
             </TabsTrigger>
-            <TabsTrigger value="settings" className="text-white data-[state=active]:bg-white/20">
+            <TabsTrigger value="settings" className="text-gray-700 data-[state=active]:bg-gray-900 data-[state=active]:text-white">
               Configurações
             </TabsTrigger>
           </TabsList>
@@ -198,61 +197,61 @@ export const ProfilePage = () => {
           {/* Aba de Estatísticas */}
           <TabsContent value="stats">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
-                <CardContent className="p-4 text-center text-white">
-                  <Store className="w-8 h-8 mx-auto mb-2 text-blue-400" />
-                  <div className="text-2xl font-bold">{mockPlayerStats.cardsFromStore}</div>
-                  <p className="text-sm text-gray-300">Cartas da Loja</p>
+              <Card className="bg-white border border-gray-200 shadow-sm">
+                <CardContent className="p-4 text-center">
+                  <Store className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                  <div className="text-2xl font-bold text-gray-900">{mockPlayerStats.cardsFromStore}</div>
+                  <p className="text-sm text-gray-600">Cartas da Loja</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
-                <CardContent className="p-4 text-center text-white">
-                  <TrendingUp className="w-8 h-8 mx-auto mb-2 text-green-400" />
-                  <div className="text-2xl font-bold">{mockPlayerStats.cardsSoldMarketplace}</div>
-                  <p className="text-sm text-gray-300">Cartas Vendidas</p>
+              <Card className="bg-white border border-gray-200 shadow-sm">
+                <CardContent className="p-4 text-center">
+                  <TrendingUp className="w-8 h-8 mx-auto mb-2 text-green-600" />
+                  <div className="text-2xl font-bold text-gray-900">{mockPlayerStats.cardsSoldMarketplace}</div>
+                  <p className="text-sm text-gray-600">Cartas Vendidas</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
-                <CardContent className="p-4 text-center text-white">
-                  <ShoppingCart className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-                  <div className="text-2xl font-bold">{mockPlayerStats.cardsBoughtMarketplace}</div>
-                  <p className="text-sm text-gray-300">Cartas Compradas</p>
+              <Card className="bg-white border border-gray-200 shadow-sm">
+                <CardContent className="p-4 text-center">
+                  <ShoppingCart className="w-8 h-8 mx-auto mb-2 text-orange-600" />
+                  <div className="text-2xl font-bold text-gray-900">{mockPlayerStats.cardsBoughtMarketplace}</div>
+                  <p className="text-sm text-gray-600">Cartas Compradas</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
-                <CardContent className="p-4 text-center text-white">
-                  <Wallet className="w-8 h-8 mx-auto mb-2 text-purple-400" />
-                  <div className="text-2xl font-bold">{formatCurrency(mockPlayerStats.totalDeposited)}</div>
-                  <p className="text-sm text-gray-300">Total Depositado</p>
+              <Card className="bg-white border border-gray-200 shadow-sm">
+                <CardContent className="p-4 text-center">
+                  <Wallet className="w-8 h-8 mx-auto mb-2 text-purple-600" />
+                  <div className="text-2xl font-bold text-gray-900">{formatCurrency(mockPlayerStats.totalDeposited)}</div>
+                  <p className="text-sm text-gray-600">Total Depositado</p>
                 </CardContent>
               </Card>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <Card className="bg-white border border-gray-200 shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <TrendingDown className="w-5 h-5 text-red-400" />
+                  <CardTitle className="text-gray-900 flex items-center gap-2">
+                    <TrendingDown className="w-5 h-5 text-red-500" />
                     Gastos Totais
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-white">
+                <CardContent>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Na Loja:</span>
-                      <span className="text-red-400">{formatCurrency(mockPlayerStats.totalSpentStore)}</span>
+                      <span className="text-gray-600">Na Loja:</span>
+                      <span className="text-red-600">{formatCurrency(mockPlayerStats.totalSpentStore)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-300">No Mercadinho:</span>
-                      <span className="text-red-400">{formatCurrency(mockPlayerStats.totalSpentMarketplace)}</span>
+                      <span className="text-gray-600">No Mercadinho:</span>
+                      <span className="text-red-600">{formatCurrency(mockPlayerStats.totalSpentMarketplace)}</span>
                     </div>
-                    <Separator className="bg-white/20" />
+                    <Separator className="bg-gray-200" />
                     <div className="flex justify-between font-bold">
-                      <span>Total:</span>
-                      <span className="text-red-400">
+                      <span className="text-gray-900">Total:</span>
+                      <span className="text-red-600">
                         {formatCurrency(mockPlayerStats.totalSpentStore + mockPlayerStats.totalSpentMarketplace)}
                       </span>
                     </div>
@@ -260,27 +259,27 @@ export const ProfilePage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <Card className="bg-white border border-gray-200 shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-green-400" />
+                  <CardTitle className="text-gray-900 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-green-500" />
                     Ganhos Totais
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-white">
+                <CardContent>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Vendas Mercadinho:</span>
-                      <span className="text-green-400">{formatCurrency(mockPlayerStats.totalEarnedMarketplace)}</span>
+                      <span className="text-gray-600">Vendas Mercadinho:</span>
+                      <span className="text-green-600">{formatCurrency(mockPlayerStats.totalEarnedMarketplace)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-300">Depósitos:</span>
-                      <span className="text-green-400">{formatCurrency(mockPlayerStats.totalDeposited)}</span>
+                      <span className="text-gray-600">Depósitos:</span>
+                      <span className="text-green-600">{formatCurrency(mockPlayerStats.totalDeposited)}</span>
                     </div>
-                    <Separator className="bg-white/20" />
+                    <Separator className="bg-gray-200" />
                     <div className="flex justify-between font-bold">
-                      <span>Total Entrada:</span>
-                      <span className="text-green-400">
+                      <span className="text-gray-900">Total Entrada:</span>
+                      <span className="text-green-600">
                         {formatCurrency(mockPlayerStats.totalEarnedMarketplace + mockPlayerStats.totalDeposited)}
                       </span>
                     </div>
@@ -288,22 +287,22 @@ export const ProfilePage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <Card className="bg-white border border-gray-200 shadow-sm">
                 <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <Wallet className="w-5 h-5 text-blue-400" />
+                  <CardTitle className="text-gray-900 flex items-center gap-2">
+                    <Wallet className="w-5 h-5 text-blue-500" />
                     Balanço Líquido
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-white">
+                <CardContent>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-400 mb-2">
+                    <div className="text-3xl font-bold text-blue-600 mb-2">
                       {formatCurrency(
                         (mockPlayerStats.totalEarnedMarketplace + mockPlayerStats.totalDeposited) -
                         (mockPlayerStats.totalSpentStore + mockPlayerStats.totalSpentMarketplace)
                       )}
                     </div>
-                    <p className="text-sm text-gray-300">Lucro/Prejuízo total</p>
+                    <p className="text-sm text-gray-600">Lucro/Prejuízo total</p>
                   </div>
                 </CardContent>
               </Card>
@@ -312,20 +311,20 @@ export const ProfilePage = () => {
 
           {/* Aba Financeira */}
           <TabsContent value="financial">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-white">Histórico de Atividades</CardTitle>
+                <CardTitle className="text-gray-900">Histórico de Atividades</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {mockFinancialHistory.map((activity) => (
-                    <div key={activity.id} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                    <div key={activity.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100">
                       <div className="flex items-center gap-3">
                         {getActivityIcon(activity.type)}
                         <div>
-                          <p className="text-white font-medium">{activity.description}</p>
+                          <p className="text-gray-900 font-medium">{activity.description}</p>
                           {activity.cardName && (
-                            <p className="text-sm text-gray-400">{activity.cardName}</p>
+                            <p className="text-sm text-gray-600">{activity.cardName}</p>
                           )}
                           <p className="text-xs text-gray-500">{formatDate(activity.date)}</p>
                         </div>
@@ -342,28 +341,28 @@ export const ProfilePage = () => {
 
           {/* Aba de Configurações */}
           <TabsContent value="settings">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white border border-gray-200 shadow-sm">
               <CardHeader>
-                <CardTitle className="text-white">Informações da Conta</CardTitle>
+                <CardTitle className="text-gray-900">Informações da Conta</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-white">
-                  <label className="block text-sm font-medium mb-2">Chave PIX</label>
-                  <div className="flex items-center gap-2 p-3 bg-white/5 rounded-lg">
-                    <CreditCard className="w-4 h-4 text-green-400" />
-                    <span className="font-mono">{mockPlayerProfile.pixKey}</span>
-                    <Button size="sm" className="ml-auto bg-blue-600 hover:bg-blue-700">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-gray-900">Chave PIX</label>
+                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <CreditCard className="w-4 h-4 text-green-600" />
+                    <span className="font-mono text-gray-900">{mockPlayerProfile.pixKey}</span>
+                    <Button size="sm" className="ml-auto bg-blue-600 hover:bg-blue-700 text-white">
                       Editar
                     </Button>
                   </div>
                 </div>
                 
-                <div className="text-white">
-                  <label className="block text-sm font-medium mb-2">Nome do Jogador</label>
-                  <div className="flex items-center gap-2 p-3 bg-white/5 rounded-lg">
-                    <User className="w-4 h-4 text-blue-400" />
-                    <span>{mockPlayerProfile.name}</span>
-                    <Button size="sm" className="ml-auto bg-blue-600 hover:bg-blue-700">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-gray-900">Nome do Jogador</label>
+                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <User className="w-4 h-4 text-blue-600" />
+                    <span className="text-gray-900">{mockPlayerProfile.name}</span>
+                    <Button size="sm" className="ml-auto bg-blue-600 hover:bg-blue-700 text-white">
                       Editar
                     </Button>
                   </div>

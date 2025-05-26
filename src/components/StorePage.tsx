@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { LootBox } from './LootBox';
@@ -69,11 +70,11 @@ export const StorePage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-8 px-4">
+    <div className="min-h-screen pt-20 pb-8 px-4 bg-gray-50">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Loja de Pacotes</h1>
-          <p className="text-xl text-purple-100">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Loja de Pacotes</h1>
+          <p className="text-xl text-gray-600">
             Compre pacotes mistério e descubra figurinhas únicas!
           </p>
         </div>
@@ -84,39 +85,39 @@ export const StorePage = () => {
         </div>
 
         {/* Probability Display */}
-        <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white mb-8">
+        <Card className="bg-white border border-gray-200 shadow-sm mb-8">
           <div className="p-6">
-            <h3 className="text-xl font-bold mb-4 text-center">Chances de Raridade</h3>
+            <h3 className="text-xl font-bold mb-4 text-center text-gray-900">Chances de Raridade</h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="text-center">
                 <div className="w-8 h-8 bg-gray-400 rounded mx-auto mb-2"></div>
-                <p className="font-semibold">Comum</p>
-                <p className="text-sm text-purple-100">57.5%</p>
-                <p className="text-sm text-yellow-300">1 Poder</p>
+                <p className="font-semibold text-gray-900">Comum</p>
+                <p className="text-sm text-gray-600">57.5%</p>
+                <p className="text-sm text-yellow-600">1 Poder</p>
               </div>
               <div className="text-center">
                 <div className="w-8 h-8 bg-green-500 rounded mx-auto mb-2"></div>
-                <p className="font-semibold">Incomum</p>
-                <p className="text-sm text-purple-100">30%</p>
-                <p className="text-sm text-yellow-300">3 Poder</p>
+                <p className="font-semibold text-gray-900">Incomum</p>
+                <p className="text-sm text-gray-600">30%</p>
+                <p className="text-sm text-yellow-600">3 Poder</p>
               </div>
               <div className="text-center">
                 <div className="w-8 h-8 bg-blue-500 rounded mx-auto mb-2"></div>
-                <p className="font-semibold">Rara</p>
-                <p className="text-sm text-purple-100">10%</p>
-                <p className="text-sm text-yellow-300">10 Poder</p>
+                <p className="font-semibold text-gray-900">Rara</p>
+                <p className="text-sm text-gray-600">10%</p>
+                <p className="text-sm text-yellow-600">10 Poder</p>
               </div>
               <div className="text-center">
                 <div className="w-8 h-8 bg-purple-500 rounded mx-auto mb-2"></div>
-                <p className="font-semibold">Épica</p>
-                <p className="text-sm text-purple-100">2%</p>
-                <p className="text-sm text-yellow-300">50 Poder</p>
+                <p className="font-semibold text-gray-900">Épica</p>
+                <p className="text-sm text-gray-600">2%</p>
+                <p className="text-sm text-yellow-600">50 Poder</p>
               </div>
               <div className="text-center">
                 <div className="w-8 h-8 bg-amber-500 rounded mx-auto mb-2"></div>
-                <p className="font-semibold">Mítica</p>
-                <p className="text-sm text-purple-100">0.5%</p>
-                <p className="text-sm text-yellow-300">200 Poder</p>
+                <p className="font-semibold text-gray-900">Mítica</p>
+                <p className="text-sm text-gray-600">0.5%</p>
+                <p className="text-sm text-yellow-600">200 Poder</p>
               </div>
             </div>
           </div>
@@ -124,14 +125,14 @@ export const StorePage = () => {
 
         {/* Opening Animation Dialog */}
         <Dialog open={isOpeningBox} onOpenChange={() => {}}>
-          <DialogContent className="bg-gradient-to-br from-purple-900 to-purple-800 border-purple-500 text-white">
+          <DialogContent className="bg-white border border-gray-200">
             <div className="text-center py-8">
-              <Gift className="w-24 h-24 mx-auto mb-4 text-yellow-300 animate-bounce" />
-              <h3 className="text-2xl font-bold mb-2">Abrindo Pacote...</h3>
+              <Gift className="w-24 h-24 mx-auto mb-4 text-yellow-500 animate-bounce" />
+              <h3 className="text-2xl font-bold mb-2 text-gray-900">Abrindo Pacote...</h3>
               <div className="flex justify-center space-x-2">
-                <Sparkles className="w-6 h-6 text-yellow-300 animate-pulse" />
-                <Sparkles className="w-6 h-6 text-yellow-300 animate-pulse delay-200" />
-                <Sparkles className="w-6 h-6 text-yellow-300 animate-pulse delay-500" />
+                <Sparkles className="w-6 h-6 text-yellow-500 animate-pulse" />
+                <Sparkles className="w-6 h-6 text-yellow-500 animate-pulse delay-200" />
+                <Sparkles className="w-6 h-6 text-yellow-500 animate-pulse delay-500" />
               </div>
             </div>
           </DialogContent>
@@ -139,9 +140,9 @@ export const StorePage = () => {
 
         {/* Result Dialog */}
         <Dialog open={showResult} onOpenChange={closeResult}>
-          <DialogContent className="bg-gradient-to-br from-purple-900 to-purple-800 border-purple-500 text-white">
+          <DialogContent className="bg-white border border-gray-200">
             <DialogHeader>
-              <DialogTitle className="text-center text-2xl font-bold text-yellow-300">
+              <DialogTitle className="text-center text-2xl font-bold text-yellow-600">
                 Parabéns! 🎉
               </DialogTitle>
             </DialogHeader>
@@ -149,14 +150,14 @@ export const StorePage = () => {
               {revealedSticker && (
                 <div className="max-w-xs mx-auto">
                   <StickerCard sticker={revealedSticker} />
-                  <p className="mt-4 text-lg">
+                  <p className="mt-4 text-lg text-gray-900">
                     Você ganhou uma figurinha <span className="font-bold capitalize">{revealedSticker.rarity}</span>!
                   </p>
                 </div>
               )}
               <Button 
                 onClick={closeResult}
-                className="mt-6 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-purple-900 font-bold"
+                className="mt-6 bg-gray-900 hover:bg-gray-800 text-white font-bold"
               >
                 Continuar
               </Button>

@@ -62,7 +62,7 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-purple-900 text-white">
+    <div className="relative min-h-screen bg-gray-50">
       <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
       {renderCurrentPage()}
     </div>

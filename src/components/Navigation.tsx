@@ -33,7 +33,7 @@ export const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
   return (
     <>
       {/* Desktop Navigation */}
-      <Card className="hidden md:block fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white/90 backdrop-blur-sm">
+      <Card className="hidden md:block fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white border border-gray-200 shadow-sm">
         <div className="flex items-center p-2 gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -43,8 +43,8 @@ export const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
                 variant={currentPage === item.id ? "default" : "ghost"}
                 onClick={() => onPageChange(item.id)}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 transition-all duration-200",
-                  currentPage === item.id && "bg-purple-600 text-white shadow-lg"
+                  "flex items-center gap-2 px-4 py-2 transition-all duration-200 text-gray-700",
+                  currentPage === item.id && "bg-gray-900 text-white shadow-sm"
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -60,7 +60,7 @@ export const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
         {/* Mobile Menu Button */}
         <Button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="fixed top-4 right-4 z-50 bg-purple-600 text-white shadow-lg"
+          className="fixed top-4 right-4 z-50 bg-gray-900 text-white shadow-sm"
           size="icon"
         >
           {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -68,7 +68,7 @@ export const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <Card className="fixed top-16 right-4 z-40 bg-white/95 backdrop-blur-sm">
+          <Card className="fixed top-16 right-4 z-40 bg-white border border-gray-200 shadow-sm">
             <div className="flex flex-col p-2 gap-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -81,8 +81,8 @@ export const Navigation = ({ currentPage, onPageChange }: NavigationProps) => {
                       setIsMobileMenuOpen(false);
                     }}
                     className={cn(
-                      "flex items-center gap-2 px-4 py-2 justify-start transition-all duration-200",
-                      currentPage === item.id && "bg-purple-600 text-white"
+                      "flex items-center gap-2 px-4 py-2 justify-start transition-all duration-200 text-gray-700",
+                      currentPage === item.id && "bg-gray-900 text-white"
                     )}
                   >
                     <Icon className="w-4 h-4" />
