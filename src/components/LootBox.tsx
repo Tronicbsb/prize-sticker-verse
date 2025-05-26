@@ -17,7 +17,7 @@ export const LootBox = ({ price, onPurchase, className }: LootBoxProps) => {
   return (
     <Card 
       className={cn(
-        "relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-white transition-all duration-300",
+        "relative overflow-hidden bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 text-white transition-all duration-300 border border-gray-300 shadow-sm",
         isHovered && "scale-105 shadow-2xl",
         className
       )}
@@ -41,7 +41,7 @@ export const LootBox = ({ price, onPurchase, className }: LootBoxProps) => {
         </div>
         
         <h3 className="text-xl font-bold mb-2">Pacote Mistério</h3>
-        <p className="text-purple-100 mb-4">Descubra uma figurinha única!</p>
+        <p className="text-gray-100 mb-4">Descubra uma figurinha única!</p>
         
         <div className="text-3xl font-bold mb-4 text-yellow-300">
           R$ {price.toFixed(2)}
@@ -49,7 +49,7 @@ export const LootBox = ({ price, onPurchase, className }: LootBoxProps) => {
         
         <Button 
           onClick={onPurchase}
-          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-purple-900 font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
         >
           Comprar Agora
         </Button>
