@@ -11,19 +11,20 @@ import { ProfilePage } from '@/components/ProfilePage';
 const Index = () => {
   const [currentPage, setCurrentPage] = useState("home");
 
-  // Calculate player's actual power based on their stickers
+  // Updated player's stickers with new images and powers
   const playerStickers = [
-    { id: '1', power: 50, team: 'blue' as const }, // CAVALEIRO DOURADO - same team
-    { id: '2', power: 200, team: 'red' as const }, // ANCESTRAL DRAGON - opposite team (100 effective)
-    { id: '3', power: 10, team: 'blue' as const }, // MAGO DAS SOMBRAS - same team
-    { id: '4', power: 75, team: 'red' as const }, // GUERREIRO SAGRADO - opposite team (37.5 = 37 effective)
-    { id: '5', power: 15, team: 'blue' as const }, // BRUXA ANCESTRAL - same team
-    { id: '6', power: 250, team: 'blue' as const }, // SENHOR DAS TREVAS - same team
+    { id: '1', power: 35, team: 'blue' as const }, // ARQUEIRO ÉLFICO - same team
+    { id: '2', power: 80, team: 'blue' as const }, // SÁBIO ANCIÃO - same team
+    { id: '3', power: 200, team: 'red' as const }, // FEITIÇO CÓSMICO - opposite team (100 effective)
+    { id: '4', power: 90, team: 'blue' as const }, // PALADINO SAGRADO - same team
+    { id: '5', power: 75, team: 'red' as const }, // GUERREIRO SOMBRIO - opposite team (37.5 = 37 effective)
+    { id: '6', power: 45, team: 'blue' as const }, // MAGO ELEMENTAL - same team
+    { id: '7', power: 250, team: 'red' as const }, // REI SOMBRIO - opposite team (125 effective)
   ];
 
   const playerTeam = "blue" as "blue" | "red";
   
-  // Calculate actual total power
+  // Calculate actual total power with 7 stickers
   const calculateTotalPower = () => {
     return playerStickers.reduce((total, sticker) => {
       const isOppositeTeam = sticker.team !== playerTeam;
@@ -32,12 +33,12 @@ const Index = () => {
     }, 0);
   };
 
-  const actualTotalPower = calculateTotalPower(); // Should be 50 + 100 + 10 + 37 + 15 + 250 = 462
+  const actualTotalPower = calculateTotalPower(); // Should be 35 + 80 + 100 + 90 + 37 + 45 + 125 = 512
 
   const playerData = {
     team: playerTeam,
-    ranking: actualTotalPower >= 400 ? 8 : 12, // Better ranking with higher power
-    generalRanking: actualTotalPower >= 400 ? 25 : 42, // Better general ranking
+    ranking: actualTotalPower >= 500 ? 6 : 10, // Better ranking with higher power
+    generalRanking: actualTotalPower >= 500 ? 18 : 30, // Better general ranking
     totalPower: actualTotalPower,
   };
 

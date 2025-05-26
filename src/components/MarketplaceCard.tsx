@@ -29,14 +29,17 @@ const rarityColors = {
   mythic: 'text-amber-600'
 };
 
-// Map sticker names to their images
+// Updated map with new sticker images
 const stickerImages = {
-  'Guerreiro Sombrio': '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
-  'Mago Elemental': '/lovable-uploads/baaec923-37bb-45ba-a83f-ffe612b643de.png',
+  'Guerreiro Sombrio': '/lovable-uploads/7960c9f3-df77-4784-8551-54bc6b7453af.png',
+  'Mago Elemental': '/lovable-uploads/7ee319b2-3c62-41e4-becc-b995af9e85ad.png',
   'Dragão Ancestral': '/lovable-uploads/3b0c09a4-91c2-442e-86b5-98c21b578549.png',
-  'Arqueiro Élfico': '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
+  'Arqueiro Élfico': '/lovable-uploads/517a592b-8888-47cf-84f5-4111f01f9406.png',
   'Cavaleiro Dourado': '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
-  'Feitiço Cósmico': '/lovable-uploads/baaec923-37bb-45ba-a83f-ffe612b643de.png'
+  'Feitiço Cósmico': '/lovable-uploads/6617ab67-03a0-429a-a6d8-934880f9aebe.png',
+  'Sábio Ancião': '/lovable-uploads/22694fe3-954d-48b3-aeeb-e1b140241913.png',
+  'Paladino Sagrado': '/lovable-uploads/6c9aba0e-bad6-44a0-a17d-308822c041dc.png',
+  'Rey Sombrio': '/lovable-uploads/04a789d2-682f-47b9-8c77-94bdf7c5a45f.png'
 };
 
 export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardProps) => {
@@ -78,8 +81,8 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
           )}
         </div>
 
-        {/* Sticker image - Aumentado para melhor visualização */}
-        <div className="w-full h-40 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden p-2">
+        {/* Sticker image - Increased size for better visualization */}
+        <div className="w-full h-48 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden p-2">
           {stickerImage ? (
             <img 
               src={stickerImage} 

@@ -18,67 +18,77 @@ interface CollectionPageProps {
 }
 
 export const CollectionPage = ({ onNavigate, playerData }: CollectionPageProps) => {
-  // Mock stickers collection with the uploaded images
+  // Updated stickers collection with the new uploaded images
   const playerStickers: Sticker[] = [
     {
       id: '1',
-      name: 'CAVALEIRO DOURADO',
-      image: '/lovable-uploads/e45ba7db-0017-43b4-b3a3-6295d9b5afff.png',
-      rarity: 'epic',
-      power: 50,
-      theme: 'Guerreiros',
+      name: 'ARQUEIRO ÉLFICO',
+      image: '/lovable-uploads/517a592b-8888-47cf-84f5-4111f01f9406.png',
+      rarity: 'rare',
+      power: 35,
+      theme: 'Elfos',
       team: playerData.team, // Same team as player
-      description: 'Um valoroso cavaleiro com armadura dourada'
+      description: 'Um hábil arqueiro élfico com precisão mortal'
     },
     {
       id: '2',
-      name: 'ANCESTRAL DRAGON',
-      image: '/lovable-uploads/3b0c09a4-91c2-442e-86b5-98c21b578549.png',
-      rarity: 'mythic',
-      power: 200,
-      theme: 'Dragões',
-      team: playerData.team === 'blue' ? 'red' : 'blue', // Opposite team
-      description: 'Um dragão ancestral de imenso poder'
+      name: 'SÁBIO ANCIÃO',
+      image: '/lovable-uploads/22694fe3-954d-48b3-aeeb-e1b140241913.png',
+      rarity: 'epic',
+      power: 80,
+      theme: 'Magia',
+      team: playerData.team, // Same team as player
+      description: 'Um sábio ancião com conhecimentos milenares'
     },
     {
       id: '3',
-      name: 'MAGO DAS SOMBRAS',
-      image: '/lovable-uploads/baaec923-37bb-45ba-a83f-ffe612b643de.png',
-      rarity: 'rare',
-      power: 10,
-      theme: 'Magia',
-      team: playerData.team, // Same team as player
-      description: 'Mestre das artes sombrias'
+      name: 'FEITIÇO CÓSMICO',
+      image: '/lovable-uploads/6617ab67-03a0-429a-a6d8-934880f9aebe.png',
+      rarity: 'mythic',
+      power: 200,
+      theme: 'Cosmos',
+      team: playerData.team === 'blue' ? 'red' : 'blue', // Opposite team
+      description: 'Um poderoso feitiço do cosmos infinito'
     },
     {
       id: '4',
-      name: 'GUERREIRO SAGRADO',
-      image: '/lovable-uploads/b2c2b5d4-f5e3-4a8c-8d7f-9e1a2b3c4d5e.png',
+      name: 'PALADINO SAGRADO',
+      image: '/lovable-uploads/6c9aba0e-bad6-44a0-a17d-308822c041dc.png',
       rarity: 'epic',
-      power: 75,
-      theme: 'Guerreiros',
-      team: playerData.team === 'blue' ? 'red' : 'blue', // Opposite team
-      description: 'Um guerreiro abençoado pelos deuses'
+      power: 90,
+      theme: 'Luz',
+      team: playerData.team, // Same team as player
+      description: 'Um paladino abençoado pela luz divina'
     },
     {
       id: '5',
-      name: 'BRUXA ANCESTRAL',
-      image: '/lovable-uploads/c3d3e6f7-a6b4-5b9d-9e8f-0f1e2d3c4b5a.png',
-      rarity: 'rare',
-      power: 15,
-      theme: 'Magia',
-      team: playerData.team, // Same team as player
-      description: 'Mestra das artes arcanas antigas'
+      name: 'GUERREIRO SOMBRIO',
+      image: '/lovable-uploads/7960c9f3-df77-4784-8551-54bc6b7453af.png',
+      rarity: 'epic',
+      power: 75,
+      theme: 'Trevas',
+      team: playerData.team === 'blue' ? 'red' : 'blue', // Opposite team
+      description: 'Um temível guerreiro das sombras'
     },
     {
       id: '6',
-      name: 'SENHOR DAS TREVAS',
-      image: '/lovable-uploads/d4e4f7g8-b7c5-6c0e-0f9g-1g2f3e4d5c6b.png',
+      name: 'MAGO ELEMENTAL',
+      image: '/lovable-uploads/7ee319b2-3c62-41e4-becc-b995af9e85ad.png',
+      rarity: 'rare',
+      power: 45,
+      theme: 'Elementos',
+      team: playerData.team, // Same team as player
+      description: 'Mestre dos elementos naturais'
+    },
+    {
+      id: '7',
+      name: 'REI SOMBRIO',
+      image: '/lovable-uploads/04a789d2-682f-47b9-8c77-94bdf7c5a45f.png',
       rarity: 'mythic',
       power: 250,
-      theme: 'Trevas',
-      team: playerData.team, // Same team as player
-      description: 'O mais poderoso dos senhores sombrios'
+      theme: 'Realeza Sombria',
+      team: playerData.team === 'blue' ? 'red' : 'blue', // Opposite team
+      description: 'O poderoso rei das trevas'
     }
   ];
 
@@ -97,8 +107,8 @@ export const CollectionPage = ({ onNavigate, playerData }: CollectionPageProps) 
   const updatedPlayerData = {
     ...playerData,
     totalPower: actualTotalPower,
-    ranking: actualTotalPower >= 300 ? 8 : 12, // Better ranking with higher power
-    generalRanking: actualTotalPower >= 300 ? 25 : 42 // Better general ranking with higher power
+    ranking: actualTotalPower >= 400 ? 6 : 10, // Better ranking with higher power
+    generalRanking: actualTotalPower >= 400 ? 18 : 30 // Better general ranking with higher power
   };
 
   return (
