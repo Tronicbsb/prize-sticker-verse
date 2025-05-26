@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -188,19 +187,19 @@ export const MarketplacePage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-8 px-4">
+    <div className="min-h-screen pt-20 pb-8 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
             <Store className="inline-block w-12 h-12 mr-4" />
             Mercadinho
           </h1>
-          <p className="text-xl text-purple-100 mb-6">
+          <p className="text-xl text-gray-700 mb-6">
             Compre e venda cartas com outros jogadores
           </p>
           
-          <Button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300">
+          <Button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300">
             <Plus className="w-5 h-5 mr-2" />
             Vender Minha Carta
           </Button>
@@ -208,28 +207,28 @@ export const MarketplacePage = () => {
 
         {/* Market Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white p-4 text-center">
-            <TrendingUp className="w-8 h-8 mx-auto mb-2 text-blue-400" />
-            <h3 className="text-2xl font-bold text-blue-400">{marketStats.totalListings}</h3>
-            <p className="text-sm text-purple-100">Cartas à Venda</p>
+          <Card className="bg-white border border-gray-200 shadow-sm p-4 text-center">
+            <TrendingUp className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+            <h3 className="text-2xl font-bold text-gray-900">{marketStats.totalListings}</h3>
+            <p className="text-sm text-gray-600">Cartas à Venda</p>
           </Card>
           
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white p-4 text-center">
-            <Gavel className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-            <h3 className="text-2xl font-bold text-orange-400">{marketStats.activeAuctions}</h3>
-            <p className="text-sm text-purple-100">Leilões Ativos</p>
+          <Card className="bg-white border border-gray-200 shadow-sm p-4 text-center">
+            <Gavel className="w-8 h-8 mx-auto mb-2 text-orange-600" />
+            <h3 className="text-2xl font-bold text-gray-900">{marketStats.activeAuctions}</h3>
+            <p className="text-sm text-gray-600">Leilões Ativos</p>
           </Card>
           
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white p-4 text-center">
-            <DollarSign className="w-8 h-8 mx-auto mb-2 text-green-400" />
-            <h3 className="text-2xl font-bold text-green-400">R$ {marketStats.averagePrice.toLocaleString()}</h3>
-            <p className="text-sm text-purple-100">Preço Médio</p>
+          <Card className="bg-white border border-gray-200 shadow-sm p-4 text-center">
+            <DollarSign className="w-8 h-8 mx-auto mb-2 text-green-600" />
+            <h3 className="text-2xl font-bold text-gray-900">R$ {marketStats.averagePrice.toLocaleString()}</h3>
+            <p className="text-sm text-gray-600">Preço Médio</p>
           </Card>
           
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white p-4 text-center">
-            <Users className="w-8 h-8 mx-auto mb-2 text-purple-400" />
-            <h3 className="text-2xl font-bold text-purple-400">R$ {marketStats.totalVolume.toLocaleString()}</h3>
-            <p className="text-sm text-purple-100">Volume Total</p>
+          <Card className="bg-white border border-gray-200 shadow-sm p-4 text-center">
+            <Users className="w-8 h-8 mx-auto mb-2 text-purple-600" />
+            <h3 className="text-2xl font-bold text-gray-900">R$ {marketStats.totalVolume.toLocaleString()}</h3>
+            <p className="text-sm text-gray-600">Volume Total</p>
           </Card>
         </div>
 
@@ -241,14 +240,14 @@ export const MarketplacePage = () => {
 
         {/* Results Header */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-2xl font-bold text-gray-900">
             {filteredListings.length} carta(s) encontrada(s)
           </h2>
           <div className="flex gap-2">
-            <Badge className="bg-blue-500 text-white">
+            <Badge className="bg-blue-100 text-blue-800 border border-blue-200">
               {filteredListings.filter(l => !l.isAuction).length} Preço Fixo
             </Badge>
-            <Badge className="bg-orange-500 text-white">
+            <Badge className="bg-orange-100 text-orange-800 border border-orange-200">
               {filteredListings.filter(l => l.isAuction).length} Leilões
             </Badge>
           </div>
@@ -268,10 +267,10 @@ export const MarketplacePage = () => {
 
         {/* Empty State */}
         {filteredListings.length === 0 && (
-          <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white p-12 text-center">
+          <Card className="bg-white border border-gray-200 shadow-sm p-12 text-center">
             <Store className="w-16 h-16 mx-auto mb-4 text-gray-400" />
-            <h3 className="text-xl font-bold mb-2">Nenhuma carta encontrada</h3>
-            <p className="text-purple-100 mb-4">
+            <h3 className="text-xl font-bold mb-2 text-gray-900">Nenhuma carta encontrada</h3>
+            <p className="text-gray-600 mb-4">
               Tente ajustar os filtros para encontrar mais cartas.
             </p>
             <Button
@@ -285,7 +284,7 @@ export const MarketplacePage = () => {
                 listingType: 'all'
               })}
               variant="outline"
-              className="border-purple-400 text-purple-200 hover:bg-purple-700 hover:text-white"
+              className="border-gray-300 text-gray-700 hover:bg-gray-100"
             >
               Limpar Filtros
             </Button>

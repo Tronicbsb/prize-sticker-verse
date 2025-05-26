@@ -55,12 +55,11 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
 
   return (
     <Card className={cn(
-      "marketplace-card transition-all duration-300 hover:scale-105 hover:shadow-lg",
-      rarityClass,
+      "marketplace-card transition-all duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200",
       listing.stickerRarity === 'mythic' && 'animate-glow'
     )}>
       <div className="relative p-4">
-        {/* Time indicator */}
+        {/* Team indicator */}
         <div className={cn(
           "absolute top-2 right-2 w-3 h-3 rounded-full",
           listing.stickerTeam === 'blue' ? 'bg-blue-500' : 'bg-red-500'
@@ -69,20 +68,20 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
         {/* Auction/Fixed indicator */}
         <div className="absolute top-2 left-2">
           {listing.isAuction ? (
-            <Badge className="bg-orange-500 text-white text-xs">
+            <Badge className="bg-orange-100 text-orange-800 border border-orange-200 text-xs">
               <Gavel className="w-3 h-3 mr-1" />
               Leilão
             </Badge>
           ) : (
-            <Badge className="bg-green-500 text-white text-xs">
+            <Badge className="bg-green-100 text-green-800 border border-green-200 text-xs">
               <DollarSign className="w-3 h-3 mr-1" />
               Fixo
             </Badge>
           )}
         </div>
 
-        {/* Sticker image - Increased size for better visualization */}
-        <div className="w-full h-48 bg-white/20 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden p-2">
+        {/* Sticker image */}
+        <div className="w-full h-48 bg-gray-100 rounded-lg mb-3 flex items-center justify-center mt-6 overflow-hidden p-2">
           {stickerImage ? (
             <img 
               src={stickerImage} 
@@ -96,25 +95,25 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
         
         {/* Sticker info */}
         <div className="text-center mb-3">
-          <h3 className="font-bold text-sm mb-1 text-gray-800">{listing.stickerName}</h3>
-          <Badge variant="secondary" className={cn("mb-2 capitalize", textColor)}>
+          <h3 className="font-bold text-sm mb-1 text-gray-900">{listing.stickerName}</h3>
+          <Badge variant="secondary" className={cn("mb-2 capitalize bg-gray-100", textColor)}>
             {listing.stickerRarity}
           </Badge>
           <div className="flex items-center justify-center gap-1 mb-2">
             <Zap className="w-4 h-4 text-yellow-500" />
-            <span className="font-semibold text-gray-800">{listing.stickerPower}</span>
+            <span className="font-semibold text-gray-900">{listing.stickerPower}</span>
           </div>
         </div>
 
         {/* Seller info */}
         <div className="flex items-center justify-center gap-1 mb-3">
-          <User className="w-3 h-3 text-gray-600" />
+          <User className="w-3 h-3 text-gray-500" />
           <span className="text-xs text-gray-600">{listing.sellerName}</span>
         </div>
 
         {/* Price info */}
         <div className="text-center mb-3">
-          <div className="text-lg font-bold text-gray-800">
+          <div className="text-lg font-bold text-gray-900">
             R$ {listing.currentPrice.toLocaleString()}
           </div>
           {listing.isAuction && listing.bidCount > 0 && (
@@ -139,7 +138,7 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
           {listing.isAuction ? (
             <Button
               onClick={() => onBid?.(listing.id)}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+              className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold"
               size="sm"
             >
               <Gavel className="w-4 h-4 mr-1" />
@@ -148,7 +147,7 @@ export const MarketplaceCard = ({ listing, onBid, onBuyNow }: MarketplaceCardPro
           ) : (
             <Button
               onClick={() => onBuyNow?.(listing.id)}
-              className="w-full bg-green-500 hover:green-600 text-white"
+              className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold"
               size="sm"
             >
               <DollarSign className="w-4 h-4 mr-1" />
